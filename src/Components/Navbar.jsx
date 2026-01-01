@@ -1,30 +1,76 @@
-import React from 'react'
+import React, { useState } from 'react'
 import assets from '../assets/assets.js'
+import ThemeToggleBtn from './ThemeToggleBtn.jsx'
 
-const Navbar = ({theme , setTheme}) => {
+const Navbar = ({ theme, setTheme }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
   return (
-    <div className='flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 sticky top-0 z-20 backdrop-blur-xl font-medium bg-white/50 dark:bg-grey-900/70'>
+    <nav className="sticky top-0 z-20 flex items-center justify-between px-4 py-4 font-medium backdrop-blur-xl bg-white/50 dark:bg-gray-900/70 sm:px-12 lg:px-24 xl:px-40">
+      
+      {/* Logo */}
+      <img
+        src={theme === 'dark' ? assets.logo_dark : assets.logo}
+        alt="Logo"
+        className="w-32 sm:w-40"
+      />
 
-      <img src = {theme === 'dark' ? assets.logo_dark : assets.logo}
-      className='w-32 sm:w-40' alt = ''/>
-<div className='text-grey-700 dark:text-white sm:text-sm max-sm:w-60 
-max-sm:pl-10
-max-sm:fixed top-0 bottom-0 right-0 max-sm:min-h-screen max-sm:h-full
-max-sm:flex-col max-sm:bg-primary max-sm:text-white max-sm:pt-20 flex sm:items-center gap-5 transition-all'>
-  <a href='#'className='sm:hover:border-b'>Home</a>
-    <a href='#services'className='sm:hover:border-b'>Services</a>
-  <a href='#our-work'className='sm:hover:border-b'>Our Work</a>
-  <a href='#contact-us'className='sm:hover:border-b'>Contact Us</a>
+      {/* Navigation Links */}
+      <div
+        className={`flex gap-5 sm:items-center sm:text-sm text-gray-700 dark:text-white
+        max-sm:fixed max-sm:top-0 max-sm:right-0 max-sm:bottom-0
+        max-sm:min-h-screen max-sm:flex-col max-sm:bg-primary
+        max-sm:pt-20 max-sm:text-white transition-all duration-300 ease-in-out
+        ${sidebarOpen ? 'max-sm:w-60 max-sm:pl-10' : 'max-sm:w-0 max-sm:overflow-hidden'}`}
+      >
+        {/* Close Icon */}
+        <img
+          src={assets.close_icon}
+          alt="Close menu"
+          className="absolute top-4 right-4 w-5 cursor-pointer sm:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
 
-</div>
-{/* button */}
-<div>
-  <a href = '#contact-us' className='text-sm max-sm:hidden flex items-center gap-2 bg-primary text-white px-6 py-2
-  rounded-full cursor-pointer hover:scale-103 transition-all'>
-    Connect <img src= {assets.arrow_icon} width={14} alt = ''/>
-    </a>
-</div>
-    </div>
+        <a href="#" onClick={() => setSidebarOpen(false)} className="sm:hover:border-b">
+          Home
+        </a>
+        <a href="#services" onClick={() => setSidebarOpen(false)} className="sm:hover:border-b">
+          Services
+        </a>
+        <a href="#our-work" onClick={() => setSidebarOpen(false)} className="sm:hover:border-b">
+          Our Work
+        </a>
+        <a href="#contact-us" onClick={() => setSidebarOpen(false)} className="sm:hover:border-b">
+          Contact Us
+        </a>
+      </div>
+
+      {/* Right Section */}
+      <div className="flex items-center gap-2 sm:gap-4">
+
+
+
+        {/* Theme Toggle Button */}
+        <ThemeToggleBtn theme={theme} setTheme={setTheme} />
+
+        {/* Mobile Menu Icon */}
+        <img
+          src={theme === 'dark' ? assets.menu_icon_dark : assets.menu_icon}
+          alt="Open menu"
+          className="w-8 cursor-pointer sm:hidden"
+          onClick={() => setSidebarOpen(true)}
+        />
+
+        {/* CTA Button */}
+        <a
+          href="#contact-us"
+          className="hidden sm:flex items-center gap-2 rounded-full bg-primary px-6 py-2 text-sm text-white transition-transform hover:scale-105"
+        >
+          Connect
+          <img src={assets.arrow_icon} alt="" width={14} />
+        </a>
+      </div>
+    </nav>
   )
 }
 
