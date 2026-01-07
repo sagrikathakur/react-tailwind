@@ -1,7 +1,7 @@
 import React from 'react'
 import Title from './Title'
 import assets from '../assets/assets'
-import { div } from 'three/tsl'
+
 
 const OurWork = () => {
 
