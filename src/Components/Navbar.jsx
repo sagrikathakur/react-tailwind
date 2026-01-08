@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import assets from '../assets/assets.js'
 import ThemeToggleBtn from './ThemeToggleBtn.jsx'
+import { motion } from "motion/react"
 
 const Navbar = ({ theme, setTheme }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-20 flex items-center justify-between px-4 py-4 font-medium backdrop-blur-xl bg-white/50 dark:bg-gray-900/70 sm:px-12 lg:px-24 xl:px-40">
+    <motion.div initial = {{opacity:0 , y: -50}}
+      animate = {{opacity:1 , y: 0}}
+      transition = {{duration:0.5 , ease: "easeOut"}}
+
+    className="sticky top-0 z-20 flex items-center justify-between px-4 py-4 font-medium backdrop-blur-xl bg-white/50 dark:bg-gray-900/70 sm:px-12 lg:px-24 xl:px-40">
       
       {/* Logo */}
       <img
@@ -16,7 +21,7 @@ const Navbar = ({ theme, setTheme }) => {
       />
 
       {/* Navigation Links */}
-      <div
+      < div
         className={`flex gap-5 sm:items-center sm:text-sm text-gray-700 dark:text-white
         max-sm:fixed max-sm:top-0 max-sm:right-0 max-sm:bottom-0
         max-sm:min-h-screen max-sm:flex-col max-sm:bg-primary
@@ -70,7 +75,7 @@ const Navbar = ({ theme, setTheme }) => {
           <img src={assets.arrow_icon} alt="" width={14} />
         </a>
       </div>
-    </nav>
+    </motion.div>
   )
 }
 
